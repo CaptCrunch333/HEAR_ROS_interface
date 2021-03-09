@@ -11,8 +11,10 @@ ROSUnit_VS::ROSUnit_VS(ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler
     this->_output_port_0 = new OutputPort(ports_id::OP_0_VS, this);
     this->_output_port_1 = new OutputPort(ports_id::OP_1_tracking_hovering_x, this);
     this->_output_port_2 = new OutputPort(ports_id::OP_2_tracking_hovering_z, this);
+    this->_output_port_3 = new OutputPort(ports_id::Relative_position, this);
+    this->_output_port_4 = new OutputPort(ports_id::Relative_velocity, this);
     
-    _ports = {_output_port_0, _output_port_1, _output_port_2};
+    _ports = {_output_port_0, _output_port_1, _output_port_2, _output_port_3, _output_port_4};
 }
 
 ROSUnit_VS::~ROSUnit_VS() {
@@ -36,6 +38,15 @@ void ROSUnit_VS::callbackVs(const geometry_msgs::PoseStamped& msg){
     Vector3D<float> relative_velocity; 
     relative_velocity.x = abs(msg.pose.position.x - old_value.x)/0.01667;
     relative_velocity.z = abs(msg.pose.position.z - old_value.z)/0.01667;
+
+    Vector3DMsg position_error;
+    position_error.data = relative_position;
+
+    Vector3DMsg velocity_error;
+    velocity_error.data = relative_velocity;
+
+    _instance_ptr->_output_port_3->receiveMsgData(&position_error);
+    _instance_ptr->_output_port_4->receiveMsgData(&velocity_error);
 
     if(relative_position.x>threshold_position && relative_velocity.x>threshold_velocity)
     {

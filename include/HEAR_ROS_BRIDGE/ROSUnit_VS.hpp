@@ -16,10 +16,12 @@ private:
     Port* _output_port_0; 
     Port* _output_port_1;
     Port* _output_port_2;
+    Port* _output_port_3;
+    Port* _output_port_4;
     static float threshold_position;
     static float threshold_velocity;         
 public:
-    enum ports_id {OP_0_VS,OP_1_tracking_hovering_x, OP_2_tracking_hovering_z};
+    enum ports_id {OP_0_VS,OP_1_tracking_hovering_x, OP_2_tracking_hovering_z, Relative_position, Relative_velocity};
     void process(DataMsg* t_msg, Port* t_port) { };
     ROSUnit_VS(ros::NodeHandle&);
     ~ROSUnit_VS();
