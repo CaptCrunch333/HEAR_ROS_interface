@@ -1,6 +1,6 @@
 #pragma once
 #include "ros/ros.h"
-#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/PointStamped.h>
 #include "HEAR_ROS_BRIDGE/ROSUnit.hpp"
 #include "HEAR_ROS_BRIDGE/ROSUnit.hpp"
 #include "HEAR_msg/Vector3DMsg.hpp"
@@ -12,7 +12,7 @@ private:
     static ROSUnit_VS* _instance_ptr;
     ros::Subscriber _sub_attitude;
     static Vector3D<float> old_value;
-    static void callbackVs(const geometry_msgs::PoseStamped& msg);
+    static void callbackVs(const geometry_msgs::PointStamped& msg);
     Port* _output_port_0; 
     Port* _output_port_1;
     Port* _output_port_2;
