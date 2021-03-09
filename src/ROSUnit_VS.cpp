@@ -21,32 +21,29 @@ ROSUnit_VS::~ROSUnit_VS() {
 
 }
 
-void ROSUnit_VS::callbackVs(const geometry_msgs::PoseStamped& msg){
-    
-
-
+void ROSUnit_VS::callbackVs(const geometry_msgs::PointStamped& msg){
 
     Vector3D<float> pos_data;
-    pos_data.x = msg.pose.position.x;
+    pos_data.x = msg.point.x;
     //pos_data.y = msg.pose.position.y;
-    pos_data.z = msg.pose.position.z;
+    pos_data.z = msg.point.z;
 
     Vector3D<float> relative_position; 
-    relative_position.x = abs(msg.pose.position.x - 0);
-    relative_position.z = abs(msg.pose.position.z - 0);
+    relative_position.x = abs(msg.point.x);
+    relative_position.z = abs(msg.point.z);
 
     Vector3D<float> relative_velocity; 
-    relative_velocity.x = abs(msg.pose.position.x - old_value.x)/0.01667;
-    relative_velocity.z = abs(msg.pose.position.z - old_value.z)/0.01667;
+    relative_velocity.x = abs(msg.point.x - old_value.x)/0.01667;
+    relative_velocity.z = abs(msg.point.z - old_value.z)/0.01667;
 
-    Vector3DMsg position_error;
-    position_error.data = relative_position;
+    // Vector3DMsg position_error;
+    // position_error.data = relative_position;
 
-    Vector3DMsg velocity_error;
-    velocity_error.data = relative_velocity;
+    // Vector3DMsg velocity_error;
+    // velocity_error.data = relative_velocity;
 
-    _instance_ptr->_output_port_3->receiveMsgData(&position_error);
-    _instance_ptr->_output_port_4->receiveMsgData(&velocity_error);
+    // _instance_ptr->_output_port_3->receiveMsgData(&position_error);
+    // _instance_ptr->_output_port_4->receiveMsgData(&velocity_error);
 
     if(relative_position.x>threshold_position && relative_velocity.x>threshold_velocity)
     {
@@ -76,9 +73,9 @@ void ROSUnit_VS::callbackVs(const geometry_msgs::PoseStamped& msg){
     }
 
 
-    old_value.x = msg.pose.position.x;
-    old_value.y = msg.pose.position.y;
-    old_value.z = msg.pose.position.z;
+    old_value.x = msg.point.x;
+    old_value.y = msg.point.y;
+    old_value.z = msg.point.z;
 
     ros::Time t_time = msg.header.stamp;
     double t_dt = t_time.toSec();
