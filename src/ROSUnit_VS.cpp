@@ -1,20 +1,13 @@
 #include "HEAR_ROS_BRIDGE/ROSUnit_VS.hpp"
 
 ROSUnit_VS* ROSUnit_VS::_instance_ptr = NULL;
-Vector3D<float> ROSUnit_VS::old_value;
-float ROSUnit_VS::threshold_position;
-float ROSUnit_VS::threshold_velocity;
 
 ROSUnit_VS::ROSUnit_VS(ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler){
     _sub_attitude = t_main_handler.subscribe("/vs_position", 2, callbackVs, ros::TransportHints().tcpNoDelay()); //Queue sizes of 2 are better than 1
     _instance_ptr = this;
     this->_output_port_0 = new OutputPort(ports_id::OP_0_VS, this);
-    this->_output_port_1 = new OutputPort(ports_id::OP_1_tracking_hovering_x, this);
-    this->_output_port_2 = new OutputPort(ports_id::OP_2_tracking_hovering_z, this);
-    this->_output_port_3 = new OutputPort(ports_id::Relative_position, this);
-    this->_output_port_4 = new OutputPort(ports_id::Relative_velocity, this);
-    
-    _ports = {_output_port_0, _output_port_1, _output_port_2, _output_port_3, _output_port_4};
+   
+    _ports = {_output_port_0};
 }
 
 ROSUnit_VS::~ROSUnit_VS() {
@@ -25,67 +18,12 @@ void ROSUnit_VS::callbackVs(const geometry_msgs::PointStamped& msg){
 
     Vector3D<float> pos_data;
     pos_data.x = msg.point.x;
-    //pos_data.y = msg.pose.position.y;
+    pos_data.y = msg.point.y;
     pos_data.z = msg.point.z;
-
-    Vector3D<float> relative_position; 
-    relative_position.x = abs(msg.point.x);
-    relative_position.z = abs(msg.point.z);
-
-    Vector3D<float> relative_velocity; 
-    relative_velocity.x = abs(msg.point.x - old_value.x)/0.01667;
-    relative_velocity.z = abs(msg.point.z - old_value.z)/0.01667;
-
-    Vector3DMsg position_error;
-    position_error.data = relative_position;
-
-    Vector3DMsg velocity_error;
-    velocity_error.data = relative_velocity;
-
-    _instance_ptr->_output_port_3->receiveMsgData(&position_error);
-    _instance_ptr->_output_port_4->receiveMsgData(&velocity_error);
-
-    if(relative_position.x>threshold_position && relative_velocity.x>threshold_velocity)
-    {
-        FloatMsg trigger_msg;
-        trigger_msg.data = 2.5;
-        _instance_ptr->_output_port_1->receiveMsgData(&trigger_msg);
-    }
-    else
-    {
-        FloatMsg trigger_msg;
-        trigger_msg.data = 1;
-        _instance_ptr->_output_port_1->receiveMsgData(&trigger_msg);
-    }
-
-    if(relative_position.z>threshold_position && relative_velocity.z>threshold_velocity)
-    {
-         FloatMsg trigger_msg;
-         trigger_msg.data = 2.5;
-        _instance_ptr->_output_port_2->receiveMsgData(&trigger_msg);
-    }
-
-    else
-    {
-         FloatMsg trigger_msg;
-         trigger_msg.data = 1;
-        _instance_ptr->_output_port_2->receiveMsgData(&trigger_msg);
-    }
-
-
-    old_value.x = msg.point.x;
-    old_value.y = msg.point.y;
-    old_value.z = msg.point.z;
-
+ 
     ros::Time t_time = msg.header.stamp;
     double t_dt = t_time.toSec();
-
     Vector3DMsg position_data;
-    
-
     position_data.data = pos_data;
-    
-
-
     _instance_ptr->_output_port_0->receiveMsgData(&position_data);
 }
