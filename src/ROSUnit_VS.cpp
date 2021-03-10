@@ -21,8 +21,8 @@ void ROSUnit_VS::callbackVs(const geometry_msgs::PointStamped& msg){
     pos_data.y = msg.point.y;
     pos_data.z = msg.point.z;
  
-    ros::Time t_time = msg.header.stamp;
-    double t_dt = t_time.toSec();
+    // ros::Time t_time = msg.header.stamp;
+    // double t_dt = t_time.toSec();
     Vector3DMsg position_data;
     position_data.data = pos_data;
     _instance_ptr->_output_port_0->receiveMsgData(&position_data);

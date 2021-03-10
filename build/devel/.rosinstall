@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/osama/catkin_ws_HEAR/src/HEAR_ROS_BRIDGE/build/devel/setup.sh
