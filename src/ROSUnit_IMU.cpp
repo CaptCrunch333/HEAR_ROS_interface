@@ -13,9 +13,9 @@ Port* ROSUnit_IMU::_output_port_4;
 Port* ROSUnit_IMU::_output_port_5;
 
 ROSUnit_IMU::ROSUnit_IMU(ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler) {
-    _sub_attitude = t_main_handler.subscribe("filter/quaternion", 2, callbackXsensAttitude);
-    _sub_body_rate = t_main_handler.subscribe("imu/angular_velocity", 2, callbackXsensBodyRate);
-    _sub_accelerometer = t_main_handler.subscribe("imu/acceleration", 2, callbackXsensFreeAcceleration);
+    _sub_attitude = t_main_handler.subscribe("filter/quaternion", 2, callbackXsensAttitude, ros::TransportHints().tcpNoDelay());
+    _sub_body_rate = t_main_handler.subscribe("imu/angular_velocity", 2, callbackXsensBodyRate, ros::TransportHints().tcpNoDelay());
+    _sub_accelerometer = t_main_handler.subscribe("imu/acceleration", 2, callbackXsensFreeAcceleration, ros::TransportHints().tcpNoDelay());
     _instance_ptr = this;
     _output_port_0 = new OutputPort(ports_id::OP_0_ROLL, this);
     _output_port_1 = new OutputPort(ports_id::OP_1_PITCH, this);
