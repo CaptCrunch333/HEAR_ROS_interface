@@ -4,7 +4,7 @@ ROSUnit_Optitrack* ROSUnit_Optitrack::_instance_ptr = NULL;
 OptitrackMsg ROSUnit_Optitrack::optitrack_msg;
 
 ROSUnit_Optitrack::ROSUnit_Optitrack(ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler){
-    _sub_attitude = t_main_handler.subscribe("/Robot_1/pose", 2, callbackOptitrack, ros::TransportHints().tcpNoDelay()); //Queue sizes of 2 are better than 1
+    _sub_attitude = t_main_handler.subscribe("/Robot_1/pose", 2, callbackOptitrack); //Queue sizes of 2 are better than 1
     _instance_ptr = this;
     this->_output_port_0 = new OutputPort(ports_id::OP_0_OPT, this);
     _ports = {_output_port_0};

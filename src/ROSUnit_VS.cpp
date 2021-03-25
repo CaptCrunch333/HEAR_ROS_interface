@@ -3,7 +3,7 @@
 ROSUnit_VS* ROSUnit_VS::_instance_ptr = NULL;
 
 ROSUnit_VS::ROSUnit_VS(ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler){
-    _sub_attitude = t_main_handler.subscribe("/vs_position", 2, callbackVs, ros::TransportHints().tcpNoDelay()); //Queue sizes of 2 are better than 1
+    _sub_attitude = t_main_handler.subscribe("/vs_position", 2, callbackVs); //Queue sizes of 2 are better than 1
     _instance_ptr = this;
     this->_output_port_0 = new OutputPort(ports_id::OP_0_VS, this);
    
