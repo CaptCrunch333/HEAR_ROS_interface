@@ -8,7 +8,7 @@
 
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/osama/catkin_ws_HEAR/src/HEAR_ROS_BRIDGE/build/devel:$CMAKE_PREFIX_PATH"
-export PATH="/opt/ros/melodic/bin:$PATH"
+export PATH='/opt/ros/melodic/bin:/home/osama/.local/bin:/home/osama/miniconda3/condabin:/home/osama/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
 export PWD='/home/osama/catkin_ws_HEAR/src/HEAR_ROS_BRIDGE/build'
 export ROSLISP_PACKAGE_DIRECTORIES="/home/osama/catkin_ws_HEAR/src/HEAR_ROS_BRIDGE/build/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
 export ROS_PACKAGE_PATH="/home/osama/catkin_ws_HEAR/src/HEAR_ROS_BRIDGE:$ROS_PACKAGE_PATH"

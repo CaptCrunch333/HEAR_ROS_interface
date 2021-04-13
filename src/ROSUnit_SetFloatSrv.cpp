@@ -28,8 +28,8 @@ Port* ROSUnit_SetFloatSrv::_output_port_6 = new OutputPort(ports_id::OP_6, NULL)
 Port* ROSUnit_SetFloatSrv::_output_port_7 = new OutputPort(ports_id::OP_7, NULL);
 Port* ROSUnit_SetFloatSrv::_output_port_8 = new OutputPort(ports_id::OP_8, NULL);
 Port* ROSUnit_SetFloatSrv::_output_port_9 = new OutputPort(ports_id::OP_9, NULL);
-Port* ROSUnit_SetFloatSrv::_output_port_8 = new OutputPort(ports_id::OP_10, NULL);
-Port* ROSUnit_SetFloatSrv::_output_port_9 = new OutputPort(ports_id::OP_11, NULL);
+Port* ROSUnit_SetFloatSrv::_output_port_10 = new OutputPort(ports_id::OP_10, NULL);
+Port* ROSUnit_SetFloatSrv::_output_port_11 = new OutputPort(ports_id::OP_11, NULL);
 
 
 ROSUnit_SetFloatSrv::ROSUnit_SetFloatSrv(std::string t_name, ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler) {
