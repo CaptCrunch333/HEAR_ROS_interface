@@ -4,7 +4,7 @@ ROSUnit_FloatsPub::ROSUnit_FloatsPub(std::string t_name, ros::NodeHandle& t_main
 {
     _input_port_0 = new InputPort(ports_id::IP_0, this);
     _ports = {_input_port_0};
-    m_pub = t_main_handler.advertise<std_msgs::Float32MultiArray>(t_name, 1, true);
+    m_pub = t_main_handler.advertise<std_msgs::Float32MultiArray>(t_name, 2, true);
 }
 
 ROSUnit_FloatsPub::~ROSUnit_FloatsPub() {

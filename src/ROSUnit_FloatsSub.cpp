@@ -19,7 +19,7 @@ Port* ROSUnit_FloatsSub::_output_port_4 = new OutputPort(ports_id::OP_4, NULL);
 
 ROSUnit_FloatsSub::ROSUnit_FloatsSub(std::string t_name, ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler)
 {
-    m_sub = t_main_handler.subscribe(t_name, 1, ROSUnit_FloatsSub::callbackFunctionPointer[internal_counter]);
+    m_sub = t_main_handler.subscribe(t_name, 2, ROSUnit_FloatsSub::callbackFunctionPointer[internal_counter]);
     m_ptr[internal_counter] = this;
     internal_counter++;
     _ports = {_output_port_0, _output_port_1, _output_port_2, _output_port_3, _output_port_4};

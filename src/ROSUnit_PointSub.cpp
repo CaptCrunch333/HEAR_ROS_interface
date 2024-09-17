@@ -38,7 +38,7 @@ Port* ROSUnit_PointSub::_output_port_13 = new OutputPort(ports_id::OP_13, NULL);
 Port* ROSUnit_PointSub::_output_port_14 = new OutputPort(ports_id::OP_14, NULL);
 
 ROSUnit_PointSub::ROSUnit_PointSub(std::string t_name, ros::NodeHandle& t_main_handler) : ROSUnit(t_main_handler) {
-    m_sub = t_main_handler.subscribe(t_name, 1, ROSUnit_PointSub::callbackFunctionPointer[internal_counter]);
+    m_sub = t_main_handler.subscribe(t_name, 2, ROSUnit_PointSub::callbackFunctionPointer[internal_counter]);
     m_ptr[internal_counter] = this;
     internal_counter++;
     _ports = {_output_port_0, _output_port_1, _output_port_2, _output_port_3, _output_port_4, _output_port_5, _output_port_6, _output_port_7, _output_port_8, _output_port_9, _output_port_10, _output_port_11, _output_port_12, _output_port_13, _output_port_14};
