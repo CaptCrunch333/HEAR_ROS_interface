@@ -7,6 +7,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   hear_architecture
   hear_msgs
+  geometry_msgs
+  tf2_geometry_msgs
+  tf2_ros
 )
 
 catkin_package(
@@ -15,6 +18,9 @@ catkin_package(
   CATKIN_DEPENDS
     hear_msgs
     roscpp
+    geometry_msgs
+    tf2_geometry_msgs
+    tf2_ros
 )
 
 include_directories(
@@ -22,13 +28,12 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-FILE(GLOB SOURCE_FILES *.cpp
+FILE(GLOB SOURCE_FILES
         src/*.cpp)
 
 add_library(${PROJECT_NAME}
 ${SOURCE_FILES}
 )
 
-add_executable(${PROJECT_NAME}_node ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
-add_dependencies(${PROJECT_NAME}_node hear_msgs_generate_messages_cpp)
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
+
